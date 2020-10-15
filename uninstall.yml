@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  tasks:
+          
+    - name: uninstalling Nginx
+      apt:
+              name: nginx
+        state: absent
+    - name: updating cache
+      apt:
+        autoremove: yes 
