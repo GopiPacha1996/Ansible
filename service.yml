@@ -1,0 +1,44 @@
+---
+- hosts: all
+  become: true
+  tasks:       
+    - name: updating all the servers
+      apt:
+        update_cache: yes
+- hosts: db_server
+  become: true
+  tasks:
+    - name: Installing Nginx
+      tags: nginx,apache
+      apt:
+        name: 
+          - nginx
+          - apache2
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"   
+- hosts: db_server
+  become: true
+  tasks:
+    - name: stoping apache service
+      tags: stop
+      service:
+        name: apache2
+        state: stopped
+      when: ansible_distribution == "Ubuntu"
+- hosts: db_server 
+  become: true
+  tasks:
+    - name: starting nginnx service
+      tags: start
+      service: 
+        name: nginx
+        state: started
+      when: ansible_distribution == "Ubuntu"
+    - name: replacing default page
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644

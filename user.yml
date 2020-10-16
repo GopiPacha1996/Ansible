@@ -1,0 +1,26 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+    - name: Creating new user
+      tags: always
+      user:
+        name: simon
+        groups: root
+       
+    - name: adding ssh keys
+      tags: always
+      authorized_key:
+              user: simon
+              key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDQBdcqLZ4NYyAGJGrWnXpafeeSPLbjLajnZh413yeLLVD3vQ1K9o0djtQY2j+X5VPIbt7M/wUVcAEgaXDQdz3XA5dv9IyOBGq73SFVoI8XH4IcPo3saPUIalIswoy37xRs3BdLDM/owdPdJzlE5x/5J/y/oudnJNJP8FuerRgnTPRGQRGOUIOmAb35HEu8p1BnjYL9hyqqryrpw1Htw0uuRhHfhVuDyl8qFn6p9LUHgW1OuYhnL7cBnhzKt+E4lU19kXTZIfIc2p9t2y5QcMaGrWP5hzqibXAu4PTJh1ljuTm4SUTVBM7yak3HQVr8xTDO+wvRqtnlWRvNWz1i/79akTqqBQYzYWl6pyYTMn3HI80QUM+ymKiOROKGFc0UIf2eNVnSSr/XHYDqQk6bP6CT17i4iw77YQml6LQUM1BilP9My9MSFJlKZRcKwUn9QC8FF4Lu6SXS70NvVrjLzKAzzfgLABZEUVtBqQT7es/MNSrJ+g4mYQhTmx1zyH6OQLc= ubuntu@ip-172-31-36-85"
+    - name: add sudoer_simon
+      tags: always
+      copy:
+        src: sudoer_simon
+        dest: /etc/sudoers.d/simon
+        owner: root
+        group: root
+        mode: 0440
+
+

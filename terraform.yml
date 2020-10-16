@@ -1,0 +1,16 @@
+---
+- hosts: db_server
+  become: true
+  tasks:
+    - name: installing unzip
+      package:
+       name: unzip
+    - name: insatlling Terraform
+      unarchive:
+          src: https://releases.hashicorp.com/terraform/0.13.4/terraform_0.13.4_linux_amd64.zip
+          dest: /usr/local/bin
+          remote_src: yes
+          owner: root
+          group: bin
+          mode: 0775
+
