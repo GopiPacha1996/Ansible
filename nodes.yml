@@ -1,0 +1,39 @@
+---
+- hosts: all
+  become: true
+  tasks:
+          
+    - name: updating all the servers
+      apt:
+        update_cache: yes
+- hosts: db_server
+  become: true
+  tasks:
+    - name: Installing Nginx
+      tags: nginx,sql
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"   
+- hosts: web_server
+  become: true
+  tasks:
+    - name: Installing Nginx
+      tags: nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+- hosts: file_server
+  become: true
+  tasks:
+    - name: Installing Nginx
+      tags: file
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+ 

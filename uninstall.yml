@@ -3,10 +3,12 @@
   become: true
   tasks:
           
-    - name: uninstalling Nginx
+    - name: uninstalling Nginx and php
       apt:
-              name: nginx
+        name: 
+         - nginx
+         - php
+         - apache2
         state: absent
-    - name: updating cache
-      apt:
-        autoremove: yes 
+        autoremove: yes
+ 

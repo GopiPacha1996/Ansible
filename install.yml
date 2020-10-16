@@ -3,10 +3,12 @@
   become: true
   tasks:
           
-    - name: Installing Nginx
+    - name: Installing Nginx and Mysql
       apt:
-        name: nginx
+        name: 
+         - nginx
+         - php
         state: present
-    - name: updating cache
-      apt:
-        update_cache: yes 
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"   
+ 
