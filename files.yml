@@ -1,0 +1,22 @@
+---
+- hosts: web_server
+  become: true
+  tasks:
+    - name: installing Nginx
+      tags: nginx
+      apt:
+        name: 
+         - nginx
+        state: present  
+        
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+    - name: Updating Default index.html
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644
+
+
