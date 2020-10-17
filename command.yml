@@ -5,8 +5,9 @@
   tasks:
     - name: insatlling nginx using command
       command: apt install -y nginx
-    - name: uninstalling everything using command
-      command:  cd /var/www/ 
-      command: mkdir nginx
+    - name: copying index.htm 
+      command:  cp index.html  /var/www/html/index.html
+    - name: restart nginx
+      command: service nginx restart
               
 

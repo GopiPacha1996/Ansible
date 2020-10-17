@@ -1,0 +1,13 @@
+
+---
+
+- hosts: all
+  tasks:
+  - name: Read the machine uptime
+    command: 'uptime -p'
+    register: uptime
+  - name: Send the uptime to slack channel
+    slack:
+    token: T0168MPT8RF/B01D5T0A873/m4qQpxyfsDcNtcVBMeJuPu2R
+    channel: '#ansible'
+    msg: 'Local system uptime is {{ uptime.stdout }}.'
