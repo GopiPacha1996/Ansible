@@ -1,0 +1,20 @@
+---
+
+- hosts: db_server
+  become: yes
+  tasks:
+   - name: Install MySQL
+     apt:
+       name: mysql-server
+       state: latest
+   - name: Install python3-mysqldb
+     apt:
+       name: "{{item}}"
+       state: latest
+     with_items:
+      - python3-mysqldb
+   - mysql_user:
+        name: root
+        password: 12345
+        priv: '*.*:ALL'
+        state: present

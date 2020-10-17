@@ -1,0 +1,10 @@
+---
+- hosts: db_server
+  become: true
+  tasks:
+     - name: cloning git repo
+       git:
+         repo: git@github.com:GopiPacha1996/Laravel.git
+         dest: /var/www/Laravel/
+         version: master      
+         accept_hostkey: yes
