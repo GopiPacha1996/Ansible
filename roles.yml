@@ -1,0 +1,22 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+       - name: update repositories
+         apt:
+           update_cache: yes
+
+- hosts: web_server
+  become: true
+  roles:
+    - web_server
+
+- hosts: db_server
+  become: true
+  roles:
+    - db_server
+- hosts: file_server
+  become: true
+  roles:
+     - web_server

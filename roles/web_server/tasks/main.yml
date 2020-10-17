@@ -1,0 +1,13 @@
+- name: Installing Nginx
+  tags: nginx
+  apt:
+    name: nginx
+    state: latest
+    update_cache: yes
+- name: Copying index.html
+  copy:
+    src: index.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: 0644

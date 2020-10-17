@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: insatlling nginx using command
+      command: apt install -y nginx
+    - name: uninstalling everything using command
+      command:  cd /var/www/ 
+      command: mkdir nginx
+              
+
