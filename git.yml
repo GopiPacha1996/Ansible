@@ -1,10 +1,18 @@
 ---
 - hosts: db_server
   become: true
+  vars_prompt:
+  - name: "githubuser"
+    prompt: "Enter your github username"
+    private: no
+  - name: "githubpassword"
+    prompt: "Enter your github password"
+    private: yes
   tasks:
-     - name: cloning git repo
-       git:
-         repo: git@github.com:GopiPacha1996/Laravel.git
-         dest: /var/www/Laravel/
-         version: master      
-         accept_hostkey: yes
+  - name: Git clone
+    expect:
+      command: git clone https://github.com/GopiPacha1996/Laravel.git /var/www/Laravel
+      responses:
+        Username: "{{ githubuser }}" # Username is a regex
+        Password: "{{ githubpassword }}" # Password is a regex
+    

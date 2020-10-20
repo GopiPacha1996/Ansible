@@ -11,6 +11,17 @@
   become: true
   roles:
     - web_server
+- hosts: web_server
+  become: true
+  vars_prompt:
+  - name: "githubuser"
+    prompt: "Enter your github username"
+    private: no
+  - name: "githubpassword"
+    prompt: "Enter your github password"
+    private: yes
+  roles:
+     - git
 
 - hosts: db_server
   become: true

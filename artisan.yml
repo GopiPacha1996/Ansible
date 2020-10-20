@@ -1,0 +1,10 @@
+---
+
+- hosts: db_server
+  become: true
+  tasks:
+  - name: Runartisan migare
+    shell: cd /var/www/Laravel/ && composer install  
+  - name: Runartisan migare
+    shell: php /var/www/Laravel/artisan migrate --force
+
